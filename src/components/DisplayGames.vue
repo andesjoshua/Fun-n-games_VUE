@@ -1,13 +1,19 @@
 <template>
-    <h1>Games</h1>
-    <ul>
-        <div v-for="game of games" :key="game.id">
-                {{game.title}}
+    <h1>Fun N' Games</h1>
+        <div v-for="game of games" :key="game.id" class="games">
+                <a href="{{game.game_url}}" target='blank'>
+                    <img v-bind:src="game.thumbnail">
+                </a>
+                <ul class="details">
+                    <li> Title: {{game.title}} </li>
+                    <li> Genre: {{game.genre}} </li>
+                    <li> Platform: {{game.platform}} </li> 
+                </ul>
         </div>
-    </ul>
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -22,3 +28,19 @@ export default {
     }
 }
 </script>
+
+<style>
+
+.details {
+    width: 200px;
+}
+
+ ul {
+     list-style-type: none;
+ }
+ .games {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+</style>
