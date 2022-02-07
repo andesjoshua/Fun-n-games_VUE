@@ -1,7 +1,7 @@
 <template>
     <h1>Fun N' Games</h1>
         <div v-for="game of games" :key="game.id" class="games">
-                <a href="{{game.game_url}}" target='blank'>
+                <a v-bind:href="game.game_url" target='blank'>
                     <img v-bind:src="game.thumbnail">
                 </a>
                 <ul class="details">
@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style>
-
 .details {
     width: 200px;
 }
@@ -40,7 +39,14 @@ export default {
  }
  .games {
     padding: 20px;
+    margin: 15px;
     display: flex;
     justify-content: center;
+    border: 1px solid black;
+    width: 700px;
+}
+.games:hover {
+    z-index: .5;
+    transform: scale(1.01)
 }
 </style>
