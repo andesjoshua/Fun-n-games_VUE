@@ -1,7 +1,9 @@
 <template>
+    <!-- Search bar functionality pending on learning state management in Vue -->
     <input class='search-bar' placeholder='Search games...'/>
     <h2>Find Your Free Game!</h2>    
     <div>
+        <!-- Buttons for filtering through game genres -->
        <button @click="filterGames('Shooter', games)">Shooter</button>
        <button @click="filterGames('Fighting', games)">Fighting</button>
        <button @click="filterGames('MMORPG', games)">MMORPG</button>
@@ -35,12 +37,12 @@
             .catch(err => console.log(err.message))
         },
         methods: {
+            // method not working properly, page breaks upon filtering more than once. Have to learn to use VUE state and filter based on that.
         filterGames: function(genre, games) {
                 return this.games = games.filter((item) => item.genre === genre)
             }
         }, 
         computed: {
-           
         }
     };
 </script>
@@ -50,9 +52,6 @@
     ul {
         list-style-type: none;
         margin: 20px;
-    }
-    input {
-        
     }
 
     button {
