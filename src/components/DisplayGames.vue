@@ -1,18 +1,17 @@
 <template>
-    <h1>Find Your Free Game!</h1>
+    <input class='search-bar' placeholder='Search games...'/>
+    <h2>Find Your Free Game!</h2>    
     <div>
-    
-       <button @click="filter(games)">All Games</button>
-       <button @click="filter(games)">Shooter</button>
-       <button @click="filter(games)">Sports</button>
-       <button @click="filter(games)">MMORPG</button>
-       <button @click="filter(games)">Card Game</button>
-
+       <button @click="filterGames('Shooter', games)">Shooter</button>
+       <button @click="filterGames('Fighting', games)">Fighting</button>
+       <button @click="filterGames('MMORPG', games)">MMORPG</button>
+       <button @click="filterGames('Card Game', games)">Card Game</button>
     </div>
         <div v-for="game of games" :key="game.id" class="games">
                 <a v-bind:href="game.game_url" target='blank'>
                     <img v-bind:src="game.thumbnail">
                 </a>
+
                 <ul class="details">
                     <li> Title: {{game.title}} </li>
                     <li> Genre: {{game.genre}} </li>
@@ -22,61 +21,84 @@
         </div>
 </template>
 
-<script>
-   
-export default {
-    data() {
-        return {
-            games: [],
+<script>   
+    export default {
+        data() {
+            return {
+                games: [],
+            }
+        },
+        mounted() {
+            fetch('http://localhost:3000/games')
+            .then(response => response.json())
+            .then(data => this.games = data)
+            .catch(err => console.log(err.message))
+        },
+        methods: {
+        filterGames: function(genre, games) {
+                return this.games = games.filter((item) => item.genre === genre)
+            }
+        }, 
+        computed: {
+           
         }
-    },
-    mounted() {
-        fetch('http://localhost:3000/games')
-        .then(response => response.json())
-        .then(data => this.games = data)
-        .catch(err => console.log(err.message))
-    },
-    methods: {
-        filter: function(genre, games) {
-            const updatedGames = games.filter((item) => {
-                // return item.genre === genre
-                console.log(genre, item)
-                
-            })
-            games = updatedGames
-            console.log(games)
-        }
-
-        
-    }
-}
+    };
 </script>
 
 <style>
-.details {
-    width: 250px;
-    align-items:center;
-    justify-content: left;
-}
+    
+    ul {
+        list-style-type: none;
+        margin: 20px;
+    }
+    input {
+        
+    }
 
- ul {
-     list-style-type: none;
-     margin: 20px;
- }
- .games {
-    padding: 20px;
-    margin: auto;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    border: .5px transparent;
-    width: 650px;
-    box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.2);
+    button {
+        color: white;
+        padding: 10px 20px;
+        background-color: blueviolet;
+        border-radius: 50px;
+        margin: 5px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    button:hover {
+        z-index: .25;
+        transform: scale(1.05)
+    }
 
-}
-.games:hover {
-    z-index: .5;
-    transform: scale(1.01);
-    background-color: #237db9;
-}
+    .details {
+        width: 250px;
+        align-items:center;
+        justify-content: left;
+    }
+
+    .games {
+        padding: 20px;
+        margin: auto;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        border: .5px transparent;
+        width: 650px;
+        box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.2);
+
+    }
+    .games:hover {
+        z-index: .5;
+        transform: scale(1.01);
+        background-color: #237db9;
+    }
+      .search-bar {
+        display: flex;
+        margin-left: 70px;
+        background-color: white;
+        border: 2px solid color #222222;
+        padding: 0.4rem 0.8rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-family: inherit;
+    }
 </style>
