@@ -9,11 +9,10 @@
        <button @click="filterGames('MMORPG', games)">MMORPG</button>
        <button @click="filterGames('Card Game', games)">Card Game</button>
     </div>
-        <div v-for="game of games" :key="game.id" class="games">
+        <div v-for="game of allGames" :key="game.id" class="games">
                 <a v-bind:href="game.game_url" target='blank'>
                     <img v-bind:src="game.thumbnail">
                 </a>
-
                 <ul class="details">
                     <li> Title: {{game.title}} </li>
                     <li> Genre: {{game.genre}} </li>
@@ -24,27 +23,21 @@
 </template>
 
 <script>   
-    export default {
-        data() {
-            return {
-                games: [],
-            }
-        },
-        mounted() {
-            fetch('http://localhost:3000/games')
-            .then(response => response.json())
-            .then(data => this.games = data)
-            .catch(err => console.log(err.message))
-        },
-        methods: {
-            // method not working properly, page breaks upon filtering more than once. Have to learn to use VUE state and filter based on that.
-        filterGames: function(genre, games) {
-                return this.games = games.filter((item) => item.genre === genre)
-            }
-        }, 
-        computed: {
+import {useStore} from 'vuex';
+import {computed} from 'vue'
+
+export default {
+    name: 'DisplayGames', 
+    setup() {
+        const store = useStore()
+        return {
+            allGames: computed(() => store.getters.allGames),
         }
-    };
+    },
+     mounted() {
+        () => this.$store.dispatch("getGames");
+  }
+};
 </script>
 
 <style>

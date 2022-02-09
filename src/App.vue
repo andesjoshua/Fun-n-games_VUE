@@ -6,6 +6,7 @@
 <script>
   import DisplayGames from './components/DisplayGames.vue'
   import Header from './components/Header.vue'
+ 
 
   export default {
     name: 'App',
@@ -13,6 +14,7 @@
       DisplayGames,
       Header,
     },
+    
   }
 </script>
 
