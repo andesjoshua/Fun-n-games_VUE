@@ -11,7 +11,7 @@ npm run serve
 ```
 ### Start local JSON server
 ```
-cd into data file and run 'json-server db.json'
+cd into data folder and run 'json-server db.json'
 ```
 
 ### Compiles and minifies for production
