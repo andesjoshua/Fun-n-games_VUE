@@ -28,15 +28,15 @@ import {computed} from 'vue'
 
 export default {
     name: 'DisplayGames', 
+     
     setup() {
-        const store = useStore()
+        const store = useStore();
         return {
             allGames: computed(() => store.getters.allGames),
+            setGames: store.dispatch('getGames')
         }
     },
-     mounted() {
-        () => this.$store.dispatch("getGames");
-  }
+    
 };
 </script>
 
