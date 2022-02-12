@@ -4,40 +4,36 @@
     <h2>Find Your Free Game!</h2>    
     <div>
         <!-- Buttons for filtering through game genres -->
-       <button @click="filterGames('Shooter', games)">Shooter</button>
-       <button @click="filterGames('Fighting', games)">Fighting</button>
-       <button @click="filterGames('MMORPG', games)">MMORPG</button>
-       <button @click="filterGames('Card Game', games)">Card Game</button>
+       <button @click="filteredGames(allGames ,'Shooter')">Shooter</button>
+       <button @click="filteredGames(allGames, 'Fighting')">Fighting</button>
+       <button @click="filteredGames(allGames, 'MMORPG',)">MMORPG</button>
+       <button @click="filteredGames(allGames, 'Card Game')">Card Game</button>
     </div>
-        <div v-for="game of allGames" :key="game.id" class="games">
-                <a v-bind:href="game.game_url" target='blank'>
-                    <img v-bind:src="game.thumbnail">
-                </a>
-                <ul class="details">
-                    <li> Title: {{game.title}} </li>
-                    <li> Genre: {{game.genre}} </li>
-                    <li> Platform: {{game.platform}} </li> 
-                    <li> Release Date: {{game.release_date}} </li>
-                </ul>
-        </div>
+        <!-- This component loads the cards for all games -->
+        <GameDetails :all-games="allGames" />
 </template>
 
 <script>   
 import {useStore} from 'vuex';
-import {computed} from 'vue'
+import {computed} from 'vue';
+import GameDetails from './GameDetails.vue'
 
 export default {
-    name: 'DisplayGames', 
-     
     setup() {
         const store = useStore();
         return {
+            //retrieves game data
             allGames: computed(() => store.getters.allGames),
-            setGames: store.dispatch('getGames')
+
+            //performs api call and stores data in state
+            setGames: store.dispatch('getGames'), 
         }
-    },
-    
-};
+    }, 
+    components: {
+        'GameDetails': GameDetails
+    }
+}
+
 </script>
 
 <style>
@@ -59,29 +55,6 @@ export default {
     button:hover {
         z-index: .25;
         transform: scale(1.05)
-    }
-
-    .details {
-        width: 250px;
-        align-items:center;
-        justify-content: left;
-    }
-
-    .games {
-        padding: 20px;
-        margin: auto;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: center;
-        border: .5px transparent;
-        width: 650px;
-        box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.2);
-
-    }
-    .games:hover {
-        z-index: .5;
-        transform: scale(1.01);
-        background-color: #237db9;
     }
       .search-bar {
         display: flex;
