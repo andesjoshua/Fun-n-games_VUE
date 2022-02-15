@@ -6,7 +6,6 @@
        <button @click="filterByGenre(allGames, 'MMORPG',)">MMORPG</button>
        <button @click="hi(allGames, 'Card Game')">Card Game</button>
     </div>
-    <!-- {{allGames.filter(item => item.genre === 'Card Game')}} -->
     
     <div v-for="game of hi(allGames)" :key="game.id" class="games">
         <a v-bind:href="game.game_url" target='blank'>
@@ -29,12 +28,10 @@
             hi(games) {
                 return games
             },
-            showRandomGame(games) {
-                let randomGameIdx = Math.floor(Math.random() * games.length)
-                let randomGame = games[randomGameIdx]
-                console.log(randomGame)
-            }
         },
+        data() {
+            // allGames: allGames
+        }
     }
 </script>
 

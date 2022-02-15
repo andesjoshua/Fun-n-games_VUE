@@ -4,26 +4,21 @@
 
     <h2>Find Your Free Game!</h2>    
 
-   
-
     <!-- This button opens a modal window where you can find a random game from the list-->
     <button @click="showModal = true" id='random-bttn'>Find Random Game</button>
     <transition appear>
         <div class='modal-overlay' v-if='showModal' @click='showModal = false'></div>
     </transition>
-    <transition name='slide' appear>
         <div class='modal' v-if='showModal'>
             <h1>Random Game Generator</h1>
 
              <!-- This component generates a random game from the allGames list -->
-            <RandomGame :all-games="allGames" :show-modal="showModal"/>     
+            <RandomGame :all-games="allGames"/>     
 
             <button @click='showModal = false'>
                 Close
-                
             </button>
         </div>
-    </transition>
 
     <!-- This component loads the cards for all games -->
     <GameDetails :all-games="allGames"/>
