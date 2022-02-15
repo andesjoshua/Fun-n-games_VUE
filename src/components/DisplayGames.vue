@@ -4,21 +4,22 @@
 
     <h2>Find Your Free Game!</h2>    
 
-    <!-- This button opens a modal window where you can find a random game from the list-->
+    <!-- This button opens a modal window where you can find a random game from the allGames array-->
     <button @click="showModal = true" id='random-bttn'>Find Random Game</button>
-    <transition appear>
-        <div class='modal-overlay' v-if='showModal' @click='showModal = false'></div>
-    </transition>
-        <div class='modal' v-if='showModal'>
-            <h1>Random Game Generator</h1>
+    <overlay appear>
+        <div class='modal-overlay' v-if='showModal' @click='showModal = false'/>
+    </overlay>
 
-             <!-- This component generates a random game from the allGames list -->
-            <RandomGame :all-games="allGames"/>     
+    <div class='modal' v-if='showModal'>
+        <h1>Random Game Generator</h1>
 
-            <button @click='showModal = false'>
-                Close
-            </button>
-        </div>
+        <!-- This component generates a random game from the allGames list -->
+        <RandomGame :all-games="allGames"/>     
+
+        <button @click='showModal = false'>
+            Close
+        </button>
+    </div>
 
     <!-- This component loads the cards for all games -->
     <GameDetails :all-games="allGames"/>
@@ -72,6 +73,7 @@ export default {
         font-family: inherit;
     }
     .modal {
+        padding: 12px;
         position: fixed;
         top: 50%;
         left: 50%;
@@ -80,7 +82,7 @@ export default {
         width: 100%;
         max-width: 400px;
         background-color: white;
-        border-radius: 16px;
+        border-radius: 10px;
     }
      #random-bttn {
          background-color: blue
@@ -93,7 +95,7 @@ export default {
          bottom: 0;
          right: 0;
          z-index: 98;
-         background-color: rgba(0, 0, 0, 0.3)
+         background-color: rgba(0, 0, 0, 0.5)
      }
    
 </style>

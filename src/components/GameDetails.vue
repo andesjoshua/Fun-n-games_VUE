@@ -1,13 +1,13 @@
 <template>
     <div>
         <!-- Buttons for filtering through game genres -->
-       <button @click="filterByGenre(allGames ,'Shooter')">Shooter</button>
-       <button @click="filterByGenre(allGames, 'Fighting')">Fighting</button>
-       <button @click="filterByGenre(allGames, 'MMORPG',)">MMORPG</button>
-       <button @click="hi(allGames, 'Card Game')">Card Game</button>
+       <button @click="filteredGames = filterGames(allGames, 'Shooter')">Shooter</button>
+       <button @click="filteredGames = filterGames(allGames, 'Fighting')">Fighting</button>
+       <button @click="filteredGames = filterGames(allGames, 'MMORPG')">MMORPG</button>
+       <button @click="filteredGames = filterGames(allGames, 'Card Game')">Card Game</button>
     </div>
     
-    <div v-for="game of hi(allGames)" :key="game.id" class="games">
+    <div v-for="game of filteredGames" :key="game.id" class="games">
         <a v-bind:href="game.game_url" target='blank'>
             <img v-bind:src="game.thumbnail">
         </a>
@@ -24,14 +24,20 @@
 <script>
     export default {
         props: ["allGames"],
-        methods: {
-            hi(games) {
-                return games
-            },
+        setup() {
+            let filterGames = (allGames, genre) => {
+                let gamesByGenre = allGames.filter(game => game.genre === genre);
+                return gamesByGenre     
+            }
+            return {
+                filterGames
+            }
         },
         data() {
-            // allGames: allGames
-        }
+            return {
+                filteredGames: []
+            }
+        },
     }
 </script>
 

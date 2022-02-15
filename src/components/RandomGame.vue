@@ -21,7 +21,7 @@ export default {
     props: ["showModal", "allGames"],
      setup() {
         let randomize = (allGames) => {
-            const randomGameIdx = Math.floor(Math.random() * allGames.length)
+            let randomGameIdx = Math.floor(Math.random() * allGames.length - 1)
             return allGames[randomGameIdx]
         }
         return { 
