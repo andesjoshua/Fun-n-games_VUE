@@ -1,20 +1,40 @@
 <template>
-    <div v-for="game of allGames" :key="game.id" class="games">
-                <a v-bind:href="game.game_url" target='blank'>
-                    <img v-bind:src="game.thumbnail">
-                </a>
-                <ul class="details">
-                    <li> Title: {{game.title}} </li>
-                    <li> Genre: {{game.genre}} </li>
-                    <li> Platform: {{game.platform}} </li> 
-                    <li> Release Date: {{game.release_date}} </li>
-                </ul>
-        </div>
+    <div>
+        <!-- Buttons for filtering through game genres -->
+       <button @click="filterByGenre(allGames ,'Shooter')">Shooter</button>
+       <button @click="filterByGenre(allGames, 'Fighting')">Fighting</button>
+       <button @click="filterByGenre(allGames, 'MMORPG',)">MMORPG</button>
+       <button @click="hi(allGames, 'Card Game')">Card Game</button>
+    </div>
+    <!-- {{allGames.filter(item => item.genre === 'Card Game')}} -->
+    
+    <div v-for="game of hi(allGames)" :key="game.id" class="games">
+        <a v-bind:href="game.game_url" target='blank'>
+            <img v-bind:src="game.thumbnail">
+        </a>
+
+        <ul class="details">
+            <li> Title: {{game.title}} </li>
+            <li> Genre: {{game.genre}} </li>
+            <li> Platform: {{game.platform}} </li> 
+            <li> Release Date: {{game.release_date}} </li>
+        </ul>
+    </div>
 </template>
 
 <script>
     export default {
-        props: ["allGames"]
+        props: ["allGames"],
+        methods: {
+            hi(games) {
+                return games
+            },
+            showRandomGame(games) {
+                let randomGameIdx = Math.floor(Math.random() * games.length)
+                let randomGame = games[randomGameIdx]
+                console.log(randomGame)
+            }
+        },
     }
 </script>
 
@@ -40,5 +60,18 @@
         z-index: .5;
         transform: scale(1.01);
         background-color: #237db9;
+    }
+    button {
+        color: white;
+        padding: 10px 20px;
+        background-color: blueviolet;
+        border-radius: 50px;
+        margin: 5px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    button:hover {
+        z-index: .25;
+        transform: scale(1.05)
     }
 </style>
