@@ -19,7 +19,7 @@
 <script>
 export default {
     props: ["showModal", "allGames"],
-     setup() {
+    setup() {
         let randomize = (allGames) => {
             let randomGameIdx = Math.floor(Math.random() * allGames.length - 1)
             return allGames[randomGameIdx]
