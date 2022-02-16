@@ -1,17 +1,20 @@
 <template>
     <div>
         <!-- Buttons for filtering through game genres -->
-       <button @click="filteredGames = filterGames(allGames, '')">All Games</button>
-       <button @click="filteredGames = filterGames(allGames, 'Shooter')">Shooter</button>
-       <button @click="filteredGames = filterGames(allGames, 'Fighting')">Fighting</button>
-       <button @click="filteredGames = filterGames(allGames, 'MMORPG')">MMORPG</button>
-       <button @click="filteredGames = filterGames(allGames, 'Card Game')">Card Game</button>
+       <button @click="filteredGames = filterGames(allGames, ''); showWelcome = false">All Games</button>
+       <button @click="filteredGames = filterGames(allGames, 'Shooter'); showWelcome = false">Shooter</button>
+       <button @click="filteredGames = filterGames(allGames, 'Fighting'); showWelcome = false">Fighting</button>
+       <button @click="filteredGames = filterGames(allGames, 'MMORPG'); showWelcome = false">MMORPG</button>
+       <button @click="filteredGames = filterGames(allGames, 'Card Game'); showWelcome = false">Card Game</button>
+       <button @click="filteredGames = filterGames(allGames, 'Strategy'); showWelcome = false">Strategy</button>
+
     </div>
 
     <!-- This div loads all games filtered by a chosen genre -->
+    <div class="page">
       <div v-for="game of filteredGames" :key="game.id" class="games">
-            <a v-bind:href="game.game_url" target='blank'>
-                <img v-bind:src="game.thumbnail">
+            <a :href="game.game_url" target='blank'>
+                <img :src="game.thumbnail"/>
             </a>
 
             <ul class="details">
@@ -21,19 +24,23 @@
                 <li> Release Date: {{game.release_date}} </li>
             </ul>
         </div>
+
+        <div v-if="showWelcome" class="welcome">
+               <h2>Find Your Free Game!</h2>    
+        </div>
+    </div>
 </template>
 
-<script>
-    // import {ref, computed} from 'vue'
-    
+<script>    
     export default {
         props: ["allGames"],
         setup() {
+                // This function takes in the allGames array and filters it to display only games that match the specified genre.
                 const filterGames = (allGames, genre) => {
                     if(genre === '') return allGames
 
                     let filteredGames = allGames.filter(game => game.genre === genre);
-                    return filteredGames     
+                    return filteredGames                        
             }
             return {
                 filterGames,
@@ -42,16 +49,31 @@
         data() {
             return {
                filteredGames: [],
+               showWelcome: true
             }
-        },
+        }
     }
 </script>
 
 <style>
-.details {
+    .page {
+        height: 100%;
+        min-height: 80vh;
+    }
+    .details {
         width: 250px;
         align-items:center;
         justify-content: left;
+    }
+
+    .welcome {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 600px;
+        font-size: 20px
     }
 
     .games {

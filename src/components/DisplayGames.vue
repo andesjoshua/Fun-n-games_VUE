@@ -2,13 +2,11 @@
     <!-- Search bar functionality pending on Vuex -->
     <input class='search-bar' placeholder='Search games...'/>
 
-    <h2>Find Your Free Game!</h2>    
-
     <!-- This button opens a modal window where you can find a random game from the allGames array-->
     <button @click="showModal = true" id='random-bttn'>Find Random Game</button>
-    <overlay appear>
+    <div appear>
         <div class='modal-overlay' v-if='showModal' @click='showModal = false'/>
-    </overlay>
+    </div>
 
     <div class='modal' v-if='showModal'>
         <h1>Random Game Generator</h1>
@@ -47,10 +45,10 @@ export default {
         'RandomGame': RandomGame,
     },
     data() {
-            return {
-                showModal: false
-            }
+        return {
+            showModal: false
         }
+    }
 }
 </script>
 
