@@ -13,18 +13,14 @@
     a:hover {
         color: red;
     }
-
     .header {
         display: flex;
         margin-left: 50px;
         padding: 20px;
     }
-
     .logo {
         height: 40px;
         margin: 5px;
         display: flex;
     }
-
-  
 </style>

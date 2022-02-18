@@ -24,14 +24,17 @@
                 <li> Release Date: {{game.release_date}} </li>
             </ul>
         </div>
-
         <div v-if="showWelcome" class="welcome">
                <h2>Find Your Free Game!</h2>    
         </div>
     </div>
+
+    <Footer :title="'From child component'" @callEvent="callEvent"/>
 </template>
 
-<script>    
+<script>   
+import Footer from './Footer.vue'
+
     export default {
         props: ["allGames"],
         setup() {
@@ -42,16 +45,26 @@
                     let filteredGames = allGames.filter(game => game.genre === genre);
                     return filteredGames                        
             }
+            const callEvent = (props) => {
+                alert(props.title)
+            }
+
             return {
                 filterGames,
+                callEvent
             }
         },
         data() {
             return {
                filteredGames: [],
-               showWelcome: true
+               showWelcome: true,
+               
             }
-        }
+        },
+        components: {
+        'Footer' : Footer
+    },
+
     }
 </script>
 
@@ -65,7 +78,6 @@
         align-items:center;
         justify-content: left;
     }
-
     .welcome {
         padding: 20px;
         display: flex;
@@ -75,7 +87,6 @@
         min-height: 600px;
         font-size: 20px
     }
-
     .games {
         padding: 20px;
         margin: auto;
@@ -85,6 +96,10 @@
         border: .5px transparent;
         width: 650px;
         box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.2);
+
+    }
+    .footer {
+        margin-bottom: 20px;
 
     }
     .filteredGames {

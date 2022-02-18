@@ -8,14 +8,13 @@ let state = {
 
 const getters = {
    allGames: state => state.games,
-
-   
 }
 
 const actions = {
     getGames({commit}) {
         axios.get('http://localhost:3000/games')
         .then(resp => { commit('setGames', resp.data) })
+        .catch(err => console.log(err))
     }
 }
 

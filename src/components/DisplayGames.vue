@@ -58,9 +58,7 @@ export default {
         list-style-type: none;
         margin: 20px;
     }
-
-    
-      .search-bar {
+    .search-bar {
         display: flex;
         margin-left: 70px;
         background-color: white;
@@ -82,18 +80,17 @@ export default {
         background-color: white;
         border-radius: 10px;
     }
-     #random-bttn {
+    #random-bttn {
          background-color: blue
-     }
+    }
 
-     .modal-overlay {
+    .modal-overlay {
          position: absolute;
          top: 0;
          left: 0;
          bottom: 0;
          right: 0;
          z-index: 98;
-         background-color: rgba(0, 0, 0, 0.5)
-     }
-   
+         background-color: rgba(0, 0, 0, 0.5);
+    }
 </style>
